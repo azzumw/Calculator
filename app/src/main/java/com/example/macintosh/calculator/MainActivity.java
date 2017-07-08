@@ -29,34 +29,55 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //BUTTON ZERO
-
-        final Button btn0 = (Button) findViewById(R.id.btn0);
-        btn0.setOnClickListener(new View.OnClickListener() {
+        final Button plusBtn = (Button) findViewById(R.id.btnPlus);
+        plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*if text is set to default 0, then replace it with the number */
-                /*if(txtfield.getText().equals(btn0.getText())){
-                    txtfield.setText(btn0.getText());
-                }
-                else
-                {   txtfield.append(btn0.getText());}*/
-                if (txtfield.getText().charAt(0) != '0') {
-                    txtfield.append(btn0.getText());
-                } else {
-                    if (checkPeriod()) {
-                        txtfield.append(btn0.getText());
-                    } else {
-                        txtfield.setText(btn0.getText());
-                    }
-                }
+                function.onOperatorCharacterPressed('+');
+                txtfield.setText(function.getStringForTextView());
 
             }
         });
 
 
-        /*
+        final Button clearBtn = (Button) findViewById(R.id.btnClear);
+        clearBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                function.onClearHeld();
+                txtfield.setText(function.getStringForTextView());
+                txtfieldans.setText("");
+                return false;
+            }
+        });
+
+        final Button equalBtn = (Button) findViewById(R.id.btnEquals);
+        equalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                txtfieldans.setText(String.valueOf(function.onEqualPress()));
+            }
+        });
+
+    } //end of oncreate()
+
+
+    public void numberPress(View view){
+        final Button btn = (Button) findViewById(view.getId());
+        onNumberPressed(btn.getText().charAt(0));
+    }
+
+    private void onNumberPressed(char theNumber) {
+        function.onNumberCharacterPressed(theNumber);
+        txtfield.setText(function.getStringForTextView());
+    }
+
+
+
+
+     /*
         final Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,91 +98,12 @@ public class MainActivity extends AppCompatActivity {
         });
            */
 
-        //PLUS function
-        final Button plusBtn = (Button) findViewById(R.id.btnPlus);
-        plusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                function.onOperatorCharacterPressed('+');
-                txtfield.setText(function.getStringForTextView());
-
-            }
-        });
-
-
-
-        //Minus
-        final Button subtractBtn = (Button) findViewById(R.id.btnSubtract);
-        subtractBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                function.onOperatorCharacterPressed('-');
-                txtfield.setText(function.getStringForTextView());
-            }
-        });
-
-        final Button equalBtn = (Button) findViewById(R.id.btnEquals);
-        equalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                function.onEqualPressed();
-                int ans = function.sum();
-                System.out.println(ans);
-                txtfieldans.setText(""+ans);
-            }
-        });
-
-
-        //CLEAR
-        final Button btnClear = (Button) findViewById(R.id.btnClear);
-        btnClear.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                function.clearStringBuilder();
-                function.clear();
-                txtfield.setText(function.getStringForTextView());
-                txtfieldans.setText("");
-                return true;
-            }
-        });
-
-        //deletes individual numbers from the textView
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                function.onClearPressed();
-                txtfield.setText(function.getStringForTextView());
-                if(function.getStringForTextView().length()==0 ) txtfieldans.setText("");
-            }
-
-
-        });
-
-    }
-
-
-
-
-    private void onNumberPressed(char theNumber) {
-        function.onNumberCharacterPressed(theNumber);
-        txtfield.setText(function.getStringForTextView());
-    }
-
-
+    //PLUS function
     @Override
     protected void onResume() {
         super.onResume();
 
     }
-
-
-    public void numberPress(View view){
-        final Button btn = (Button) findViewById(view.getId());
-        onNumberPressed(btn.getText().charAt(0));
-    }
-
-
     /**
      * @return boolean hasPeriod
      * checkPeriod method checks if there is any period
