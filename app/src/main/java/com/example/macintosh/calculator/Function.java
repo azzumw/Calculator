@@ -56,7 +56,8 @@ public class Function {
         * replaced; hence, it first checks whether number displayed is zero; if it is, it
         * replaces zero with the number pressed;
         * */
-        if(stringBuilderForText.charAt(0) == ZERO) {stringBuilderForText.replace(0,1,String.valueOf(theNumber));}
+        if(stringBuilderForText.charAt(0) == ZERO) {stringBuilderForText.setCharAt(0,theNumber);
+        System.out.println(stringBuilderForText);}
 
         else{
 
@@ -65,7 +66,7 @@ public class Function {
 
             }
             else{
-                numbers.get(numbers.size()-1).append(theNumber);
+                numbers.get(numbers.size()-1).append(theNumber);System.out.println(stringBuilderForText);
             }
         }
         /*if the last element in the numbers array is a plus character
@@ -103,7 +104,7 @@ public class Function {
         //clear the array
         numbers.clear();
         stringBuilderForText.delete(0,stringBuilderForText.length());
-        if(stringBuilderForText.length()==0) stringBuilderForText.append("0");
+        if(stringBuilderForText.length()==0) stringBuilderForText.append('0');
         //stringBuilderForText.setCharAt(0,'0');
         numbers.add(stringBuilderForText);
         Log.v("StringBuilderForText: ", ""+stringBuilderForText);
@@ -112,8 +113,28 @@ public class Function {
     public void onClearPressed(){
         //text: 1+2
         // when user presses C it needs to delete
+       if(numbers.size()==1){
 
-        numbers.get(numbers.size()-1).deleteCharAt(numbers.get(numbers.size()-1).length()-1);
+           //System.out.println(stringBuilderForText.length());
+            //Log.v("stringbuildForText: ",""+stringBuilderForText);
+
+           if(stringBuilderForText.length()==0){
+               System.out.println("here");
+
+               System.out.println("StringBuilderText: "+stringBuilderForText);
+
+           }
+           else {
+               stringBuilderForText.deleteCharAt(stringBuilderForText.length()-1);
+               System.out.println("String after del: " + stringBuilderForText);
+               System.out.println("StringText lenght: "+ stringBuilderForText.length());
+           }
+
+       }
+       else{
+           numbers.get(numbers.size()-1).deleteCharAt(numbers.get(numbers.size()-1).length()-1);
+       }
+
 
     }
 
