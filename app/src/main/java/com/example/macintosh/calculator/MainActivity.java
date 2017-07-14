@@ -22,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
         //final TextView txtfield = (TextView) findViewById(R.id.TextField);
         txtfield = (TextView) findViewById(R.id.TextField);
         txtfieldans = (TextView) findViewById(R.id.TextFieldAnswer);
-        txtfield.setText("0");
-        txtfieldans.setText("");
+
+
 
         function = new Function();
+        txtfield.setText(function.getStringForTextView());
+        txtfieldans.setText("");
 
 
 
@@ -51,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                function.onClearPressed();
+                txtfield.setText(function.getStringForTextView());
+            }
+        });
+
 
         final Button equalBtn = (Button) findViewById(R.id.btnEquals);
         equalBtn.setOnClickListener(new View.OnClickListener() {

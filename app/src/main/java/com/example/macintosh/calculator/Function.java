@@ -13,8 +13,8 @@ public class Function {
     private ArrayList<StringBuilder> numbers;
     private ArrayList<String> operators;
 
-    StringBuilder stringBuilderForText;
-
+    private StringBuilder stringBuilderForText;
+    private final char ZERO = '0';
 
     private int numbersArrayIndexNumber;
    // private StringBuilder currentNumberStringBuilder;
@@ -25,7 +25,7 @@ public class Function {
         numbers = new ArrayList<StringBuilder>();
 
         //make a string builder object with value 0
-        stringBuilderForText = new StringBuilder('0');
+        stringBuilderForText = new StringBuilder("0");
 
         //add the string builder object to the numbers array
         numbers.add(0,stringBuilderForText);
@@ -51,14 +51,28 @@ public class Function {
     }
 
     public void onNumberCharacterPressed(char theNumber) {
-        //add theNumber to current stringbuilder Object
-        if(numbers.get(numbers.size()-1).toString().equals("+")){
-            numbers.add(new StringBuilder().append(theNumber));
+        /*
+        * When number is pressed, because the default text shows 0, it needs to be first
+        * replaced; hence, it first checks whether number displayed is zero; if it is, it
+        * replaces zero with the number pressed;
+        * */
+        if(stringBuilderForText.charAt(0) == ZERO) {stringBuilderForText.replace(0,1,String.valueOf(theNumber));}
 
-        }
         else{
-            numbers.get(numbers.size()-1).append(theNumber);
+
+            if(numbers.get(numbers.size()-1).toString().equals("+")){
+                numbers.add(new StringBuilder().append(theNumber));
+
+            }
+            else{
+                numbers.get(numbers.size()-1).append(theNumber);
+            }
         }
+        /*if the last element in the numbers array is a plus character
+        * then add a new stringBuilder object; else, append to current
+        * stringBuilder object.
+        * */
+
 
         printNumbers();
     }
@@ -66,7 +80,10 @@ public class Function {
 
     public void onOperatorCharacterPressed(char theOperator) {
         //addNumber(new StringBuilder().insert(numbersArrayIndexNumber,theOperator));
-        numbers.add(new StringBuilder().append(theOperator));
+
+            numbers.add(new StringBuilder().append(theOperator));
+
+
 
     }
 
@@ -85,10 +102,22 @@ public class Function {
         //delete stringbuilders..
         //clear the array
         numbers.clear();
-        stringBuilderForText.delete(0,stringBuilderForText.length()-1);
-        stringBuilderForText.insert(0,'0');
-        numbers.add(0,stringBuilderForText);
+        stringBuilderForText.delete(0,stringBuilderForText.length());
+        if(stringBuilderForText.length()==0) stringBuilderForText.append("0");
+        //stringBuilderForText.setCharAt(0,'0');
+        numbers.add(stringBuilderForText);
+        Log.v("StringBuilderForText: ", ""+stringBuilderForText);
     }
+
+    public void onClearPressed(){
+        //text: 1+2
+        // when user presses C it needs to delete
+
+        numbers.get(numbers.size()-1).deleteCharAt(numbers.get(numbers.size()-1).length()-1);
+
+    }
+
+
     public void printNumbers(){
         for (int i = 0; i <numbers.size() ; i++) {
             Log.v("Index: "+i, numbers.get(i).toString());
