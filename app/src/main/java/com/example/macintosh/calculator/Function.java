@@ -115,24 +115,26 @@ public class Function {
         // when user presses C it needs to delete
        if(numbers.size()==1){
 
-           //System.out.println(stringBuilderForText.length());
-            //Log.v("stringbuildForText: ",""+stringBuilderForText);
 
-           if(stringBuilderForText.length()==0){
-               System.out.println("here");
+           if(stringBuilderForText.length()==1){
 
-               System.out.println("StringBuilderText: "+stringBuilderForText);
-
+               numbers.remove(numbers.size()-1);
+               stringBuilderForText.delete(0,stringBuilderForText.length());
+               stringBuilderForText.append("0");
+               numbers.add(stringBuilderForText);
            }
            else {
                stringBuilderForText.deleteCharAt(stringBuilderForText.length()-1);
-               System.out.println("String after del: " + stringBuilderForText);
-               System.out.println("StringText lenght: "+ stringBuilderForText.length());
+
            }
 
        }
+
        else{
+
            numbers.get(numbers.size()-1).deleteCharAt(numbers.get(numbers.size()-1).length()-1);
+           if(numbers.get(numbers.size()-1).length()==0) numbers.remove(numbers.size()-1);
+
        }
 
 
