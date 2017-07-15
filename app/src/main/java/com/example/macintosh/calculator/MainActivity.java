@@ -42,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Button minusBtn = (Button) findViewById(R.id.btnSubtract);
+        minusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do something
+
+            }
+        });
+
 
         final Button clearBtn = (Button) findViewById(R.id.btnClear);
         clearBtn.setOnLongClickListener(new View.OnLongClickListener() {

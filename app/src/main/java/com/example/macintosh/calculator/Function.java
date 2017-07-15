@@ -84,8 +84,6 @@ public class Function {
 
             numbers.add(new StringBuilder().append(theOperator));
 
-
-
     }
 
     public int onEqualPress(){
@@ -100,19 +98,32 @@ public class Function {
 
 
     public void onClearHeld(){
-        //delete stringbuilders..
+
         //clear the array
         numbers.clear();
+
+        //delete the stringBuilderForText
         stringBuilderForText.delete(0,stringBuilderForText.length());
+
+        //when the length of stringBuilder becomes 0, put zero in it
         if(stringBuilderForText.length()==0) stringBuilderForText.append('0');
-        //stringBuilderForText.setCharAt(0,'0');
+
+        //then add the stringbuilder in the numbers array
         numbers.add(stringBuilderForText);
+
         Log.v("StringBuilderForText: ", ""+stringBuilderForText);
     }
 
     public void onClearPressed(){
         //text: 1+2
         // when user presses C it needs to delete
+        /*
+        * if numbers array size is ONE(i.e one element)
+        * then check if in this element the length of the
+        * stringbuilder isEqual to ONE (has one character); if it is, we need to remove or clear this
+        * element from the array; we also need to remove/clear the character in it. We then
+        * append zero to the stringBuilder element and re-add that to the numbers array
+        * */
        if(numbers.size()==1){
 
 
@@ -123,6 +134,11 @@ public class Function {
                stringBuilderForText.append("0");
                numbers.add(stringBuilderForText);
            }
+
+           /*
+                else if the length of stringbuilder object is more than 1 then
+                we decrementally delete the characters in this element
+            */
            else {
                stringBuilderForText.deleteCharAt(stringBuilderForText.length()-1);
 
@@ -130,6 +146,13 @@ public class Function {
 
        }
 
+
+       /*
+       * This else deals with the case when array size is more than one (has more elements than one)
+       * we need to grab the last element in the array then we need to delete the last character
+       * in the stringBuilder object of this last element. When the length of the strinbuilder object in this
+       * last element of array becomes ZERO we need to remove this element of the array
+       * */
        else{
 
            numbers.get(numbers.size()-1).deleteCharAt(numbers.get(numbers.size()-1).length()-1);
