@@ -94,36 +94,6 @@ public class MainActivity extends AppCompatActivity {
         txtfield.setText(function.getStringForTextView());
     }
 
-
-
-
-     /*
-        final Button btn1 = (Button) findViewById(R.id.btn1);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onNumberPressed('1');
-
-            }
-        });
-
-
-        //BUTTON TWO
-        final Button btn2 = (Button) findViewById(R.id.btn2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onNumberPressed('2');
-            }
-        });
-           */
-
-    //PLUS function
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
     /**
      * @return boolean hasPeriod
      * checkPeriod method checks if there is any period
