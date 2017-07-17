@@ -10,35 +10,15 @@ import java.util.ArrayList;
 
 public class Function {
 
+    private static final char ZERO = '0';
+
     private ArrayList<StringBuilder> numbers;
 //    private ArrayList<String> operators;
 
-    private StringBuilder stringBuilderForText;
-    private final char ZERO = '0';
-
-    private int numbersArrayIndexNumber;
-    // private StringBuilder currentNumberStringBuilder;
-
-
     public Function() {
-        numbers = new ArrayList<StringBuilder>();
-
-        //make a string builder object with value 0
-        stringBuilderForText = new StringBuilder("0");
-
-        //add the string builder object to the numbers array
-        numbers.add(0, stringBuilderForText);
-
-
-        numbersArrayIndexNumber = numbers.size() - 1;  //0
-
+        numbers = new ArrayList<>();
+        reset();
     }
-
-
-    public void addToNumber(StringBuilder n) {
-        numbers.add(n);
-    }
-
 
     public String getStringForTextView() {
         String string = "";
@@ -54,14 +34,13 @@ public class Function {
         * replaced; hence, it first checks whether number displayed is zero; if it is, it
         * replaces zero with the number pressed;
         * */
-        if (stringBuilderForText.charAt(0) == ZERO) {
-            stringBuilderForText.setCharAt(0, theNumber);
-            System.out.println(stringBuilderForText);
+        if (getLastNumber().charAt(0) == ZERO) {
+            getLastNumber().setCharAt(0, theNumber);
         } else {
-            if (numbers.get(numbers.size() - 1).toString().equals("+")) {
+            if (getLastNumber().toString().equals("+")) {
                 numbers.add(new StringBuilder().append(theNumber));
             } else {
-                numbers.get(numbers.size() - 1).append(theNumber);
+                getLastNumber().append(theNumber);
             }
         }
 
@@ -75,8 +54,6 @@ public class Function {
 
 
     public void onOperatorCharacterPressed(char theOperator) {
-        //addNumber(new StringBuilder().insert(numbersArrayIndexNumber,theOperator));
-        //if(stringBuilderForText.charAt(0) == ZERO) {stringBuilderForText.setCharAt(0,theOperator);}
         numbers.add(new StringBuilder().append(theOperator));
 
     }
@@ -92,21 +69,9 @@ public class Function {
     }
 
 
-    public void onClearHeld() {
-
-        //clear the array
+    public void reset() {
         numbers.clear();
-
-        //delete the stringBuilderForText
-        stringBuilderForText.delete(0, stringBuilderForText.length());
-
-        //when the length of stringBuilder becomes 0, put zero in it
-        if (stringBuilderForText.length() == 0) stringBuilderForText.append('0');
-
-        //then add the stringbuilder in the numbers array
-        numbers.add(stringBuilderForText);
-
-        Log.v("StringBuilderForText: ", "" + stringBuilderForText);
+        numbers.add(new StringBuilder().append('0'));
     }
 
     public void onClearPressed() {
@@ -122,12 +87,8 @@ public class Function {
         if (numbers.size() == 1) {
 
 
-            if (stringBuilderForText.length() == 1) {
-
-                numbers.remove(numbers.size() - 1);
-                stringBuilderForText.delete(0, stringBuilderForText.length());
-                stringBuilderForText.append("0");
-                numbers.add(stringBuilderForText);
+            if (getLastNumber().length() == 1) {
+                reset();
             }
 
            /*
@@ -135,12 +96,10 @@ public class Function {
                 we decrementally delete the characters in this element
             */
             else {
-                stringBuilderForText.deleteCharAt(stringBuilderForText.length() - 1);
-
+                StringBuilder lastNumber = getLastNumber();
+                lastNumber.deleteCharAt(lastNumber.length() - 1);
             }
-
         }
-
 
        /*
        * This else deals with the case when array size is more than one (has more elements than one)
@@ -149,15 +108,14 @@ public class Function {
        * last element of array becomes ZERO we need to remove this element of the array
        * */
         else {
+            StringBuilder lastNumber = getLastNumber();
+            lastNumber.deleteCharAt(lastNumber.length() - 1);
 
-            numbers.get(numbers.size() - 1).deleteCharAt(numbers.get(numbers.size() - 1).length() - 1);
-            if (numbers.get(numbers.size() - 1).length() == 0) numbers.remove(numbers.size() - 1);
-
+            if (getLastNumber().length() == 0) {
+                numbers.remove(numbers.size() - 1);
+            }
         }
-
-
     }
-
 
     public void printNumbers() {
         for (int i = 0; i < numbers.size(); i++) {
@@ -165,9 +123,7 @@ public class Function {
         }
     }
 
-    public void getSize() {
-        Log.v("Size of numbers array: ", "" + numbers.size());
+    private StringBuilder getLastNumber() {
+        return numbers.get(numbers.size() - 1);
     }
-
-
 }
