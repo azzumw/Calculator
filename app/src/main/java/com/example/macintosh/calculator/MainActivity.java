@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //do something
+                function.onOperatorCharacterPressed('-');
+                txtfield.setText(function.getStringForTextView());
 
             }
         });

@@ -13,10 +13,11 @@ public class Function {
     private static final char ZERO = '0';
 
     private ArrayList<StringBuilder> numbers;
-//    private ArrayList<String> operators;
+    private ArrayList<Character> operators;
 
     public Function() {
         numbers = new ArrayList<>();
+        operators = new ArrayList<>();
         reset();
     }
 
@@ -34,14 +35,25 @@ public class Function {
         * replaced; hence, it first checks whether number displayed is zero; if it is, it
         * replaces zero with the number pressed;
         * */
-        if (getLastNumber().charAt(0) == ZERO) {
-            getLastNumber().setCharAt(0, theNumber);
-        } else {
-            if (getLastNumber().toString().equals("+")) {
-                numbers.add(new StringBuilder().append(theNumber));
-            } else {
-                getLastNumber().append(theNumber);
-            }
+//        if (getLastNumber().charAt(0) == ZERO) {
+//            getLastNumber().setCharAt(0, theNumber);
+//        } else {
+//            if (getLastNumber().toString().equals("+")) {
+//                numbers.add(new StringBuilder().append(theNumber));
+//            } else {
+//                getLastNumber().append(theNumber);
+//            }
+//        }
+
+        if(getLastNumber().toString().equals("+")){
+            numbers.add(new StringBuilder().append(theNumber));
+        }
+        else if (getLastNumber().toString().equals("-")){
+            getLastNumber().append(theNumber);
+        }
+
+        else{
+            getLastNumber().append(theNumber);
         }
 
         /*if the last element in the numbers array is a plus character
@@ -49,12 +61,18 @@ public class Function {
         * stringBuilder object.
         * */
 
-        printNumbers();
+//        printNumbers();
     }
 
 
     public void onOperatorCharacterPressed(char theOperator) {
-        numbers.add(new StringBuilder().append(theOperator));
+            if(getLastNumber().toString().equals("")){
+                getLastNumber().append(theOperator);
+            }
+            else{
+                numbers.add(new StringBuilder().append(theOperator));
+            }
+
 
     }
 
@@ -71,7 +89,7 @@ public class Function {
 
     public void reset() {
         numbers.clear();
-        numbers.add(new StringBuilder().append('0'));
+        numbers.add(new StringBuilder().append(""));
     }
 
     public void onClearPressed() {
@@ -117,11 +135,11 @@ public class Function {
         }
     }
 
-    public void printNumbers() {
-        for (int i = 0; i < numbers.size(); i++) {
-            Log.v("Index: " + i, numbers.get(i).toString());
-        }
-    }
+//    public void printNumbers() {
+//        for (int i = 0; i < numbers.size(); i++) {
+//            Log.v("Index: " + i, numbers.get(i).toString());
+//        }
+//    }
 
     private StringBuilder getLastNumber() {
         return numbers.get(numbers.size() - 1);
