@@ -13,11 +13,9 @@ public class Function {
     private static final char ZERO = '0';
 
     private ArrayList<StringBuilder> numbers;
-    private ArrayList<Character> operators;
 
     public Function() {
         numbers = new ArrayList<>();
-        operators = new ArrayList<>();
         reset();
     }
 
