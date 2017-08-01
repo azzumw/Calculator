@@ -1,7 +1,5 @@
 package com.example.macintosh.calculator;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -13,12 +11,17 @@ public class Function {
     private static final char ZERO = '0';
 
     private ArrayList<StringBuilder> numbers;
+    private ArrayList<String> operators;
 
     public Function() {
         numbers = new ArrayList<>();
+        operators = new ArrayList<>();
         reset();
     }
 
+    /**
+     * ABSOLUTELY DO NOT CHANGE
+     */
     public String getSummaryString() {
         String string = "";
         for (StringBuilder sb : numbers) {
@@ -28,66 +31,43 @@ public class Function {
     }
 
     public void onNumberCharacterPressed(char theNumber) {
-        /*
-        * When number is pressed, because the default text shows 0, it needs to be first
-        * replaced; hence, it first checks whether number displayed is zero; if it is, it
-        * replaces zero with the number pressed;
-        * */
-//        if (getLastNumber().charAt(0) == ZERO) {
-//            getLastNumber().setCharAt(0, theNumber);
-//        } else {
-//            if (getLastNumber().toString().equals("+")) {
-//                numbers.add(new StringBuilder().append(theNumber));
-//            } else {
-//                getLastNumber().append(theNumber);
-//            }
-//        }
-
-        if(getLastNumber().toString().equals("+")){
-            numbers.add(new StringBuilder().append(theNumber));
-        }
-        else if (getLastNumber().toString().equals("-")){
+        if (isOperatorsAndNumbersListsEqual()) {
+            numbers.add(new StringBuilder(Character.valueOf(theNumber).toString()));
+        } else if (theNumber == '0' && isLastNumberZero()) {
+            // nothing to do
+        } else {
+            // TODO append the number to the last item in the numbers array
             getLastNumber().append(theNumber);
         }
-
-        else{
-            getLastNumber().append(theNumber);
-        }
-
-        /*if the last element in the numbers array is a plus character
-        * then add a new stringBuilder object; else, append to current
-        * stringBuilder object.
-        * */
-
-//        printNumbers();
     }
 
 
     public void onOperatorCharacterPressed(char theOperator) {
-            if(getLastNumber().toString().equals("")){
-                getLastNumber().append(theOperator);
-            }
-            else{
-                numbers.add(new StringBuilder().append(theOperator));
-            }
-
-
+        if (numbers.size() == 0) {
+            // nothing to do
+        } else if (isOperatorsAndNumbersListsEqual()) {
+            // TODO replace the last operator that was put in the operators list
+            operators.set(operators.size()-1,String.valueOf(theOperator));
+        } else {
+            // TODO append the operator to the operators list
+            operators.add(String.valueOf(theOperator));
+        }
     }
 
+    /**
+     * ABSOLUTELY DO NOT CHANGE
+     */
     public int getResult() {
         int sum = 0;
         for (int i = 0; i < numbers.size(); i++) {
-            if (!numbers.get(i).toString().equals("+")) {
-                sum = sum + Integer.valueOf(numbers.get(i).toString());
-            }
+            sum = sum + Integer.valueOf(numbers.get(i).toString());
         }
         return sum;
     }
 
-
     public void reset() {
         numbers.clear();
-        numbers.add(new StringBuilder().append(""));
+        operators.clear();
     }
 
     public void onClearPressed() {
@@ -141,5 +121,20 @@ public class Function {
 
     private StringBuilder getLastNumber() {
         return numbers.get(numbers.size() - 1);
+    }
+
+    private boolean isLastNumberZero() {
+        // TODO: check whether the last item in the numbers list is "0"
+        boolean isLastNumberZero = false;
+        if(numbers.get(numbers.size()-1).equals("0")){
+            isLastNumberZero = true;
+        }
+
+        return isLastNumberZero;
+
+    }
+
+    private boolean isOperatorsAndNumbersListsEqual() {
+        return operators.size() == numbers.size();
     }
 }
