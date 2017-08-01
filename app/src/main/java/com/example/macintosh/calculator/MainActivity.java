@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         function = new Function();
-        txtfield.setText(function.getStringForTextView());
+        txtfield.setText(function.getSummaryString());
         txtfieldans.setText("");
 
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 function.onOperatorCharacterPressed('+');
-                txtfield.setText(function.getStringForTextView());
+                txtfield.setText(function.getSummaryString());
 
             }
         });
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //do something
                 function.onOperatorCharacterPressed('-');
-                txtfield.setText(function.getStringForTextView());
+                txtfield.setText(function.getSummaryString());
 
             }
         });
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 function.reset();
-                txtfield.setText(function.getStringForTextView());
+                txtfield.setText(function.getSummaryString());
                 txtfieldans.setText("");
                 return false;
             }
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onClearPressed();
-                txtfield.setText(function.getStringForTextView());
+                txtfield.setText(function.getSummaryString());
             }
         });
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                txtfieldans.setText(String.valueOf(function.onEqualPress()));
+                txtfieldans.setText(String.valueOf(function.getResult()));
             }
         });
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onNumberPressed(char theNumber) {
         function.onNumberCharacterPressed(theNumber);
-        txtfield.setText(function.getStringForTextView());
+        txtfield.setText(function.getSummaryString());
     }
 
     /**

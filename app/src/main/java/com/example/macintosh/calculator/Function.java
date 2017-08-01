@@ -21,7 +21,7 @@ public class Function {
         reset();
     }
 
-    public String getStringForTextView() {
+    public String getSummaryString() {
         String string = "";
         for (StringBuilder sb : numbers) {
             string += sb;
@@ -76,7 +76,7 @@ public class Function {
 
     }
 
-    public int onEqualPress() {
+    public int getResult() {
         int sum = 0;
         for (int i = 0; i < numbers.size(); i++) {
             if (!numbers.get(i).toString().equals("+")) {
