@@ -1,6 +1,7 @@
 package com.example.macintosh.calculator;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -77,10 +78,103 @@ public class FunctionTest {
 
     }
 
+    @Test
+    public void test_getSummaryString_onZeroPressed(){
+        Function function = new Function();
+            int count = 0;
+            while(count<3){
+                function.onNumberCharacterPressed('0');
+                count++;
+            }
+
+
+        String result = function.getSummaryString();
+        Assert.assertEquals("0",result);
+
+
+    }
 
     // TODO: fill in three missing getResult tests
+    @Test
+    public void test_get_Result_for_oneNumber_oneOperator_oneNumber(){
+        Function function = new Function();
+        function.onNumberCharacterPressed('5');
+        function.onOperatorCharacterPressed('+');
+        function.onNumberCharacterPressed('7');
+
+        int result = function.getResult();
+
+        Assert.assertEquals(5+7,result);
+    }
+
+    @Test
+    public void test_getResult_for_NumbNumbOperatorZero (){
+        Function function = new Function();
+        function.onNumberCharacterPressed('4');
+        function.onNumberCharacterPressed('8');
+        function.onOperatorCharacterPressed('+');
+        function.onNumberCharacterPressed('0');
+
+        int result = function.getResult();
+
+        Assert.assertEquals(48,result);
+
+    }
 
 
+    @Test
+    public void test_onClearPressed_afterAddingOneNumber() {
+        // Given.
+        Function function = new Function();
+        function.onNumberCharacterPressed('5');
 
+        // When.
+        function.onClearPressed();
+
+        // Then.
+        Assert.assertEquals("", function.getSummaryString());
+    }
+
+    @Test
+    @Ignore
+    public void test_onClearPressed_whenNothingAdded() {
+        // Given.
+        Function function = new Function();
+
+        // When.
+        function.onClearPressed();
+
+        // Then.
+        Assert.assertEquals("", function.getSummaryString());
+    }
+
+    @Test
+    public void test_onClearPressed_afterAddingTwoNumbers() {
+        // Given.
+        Function function = new Function();
+        function.onNumberCharacterPressed('5');
+        function.onNumberCharacterPressed('6');
+
+        // When.
+        function.onClearPressed();
+
+        // Then.
+        Assert.assertEquals("5", function.getSummaryString());
+    }
+
+    @Test
+    @Ignore
+    public void test_onClearPressed_afterAddingOneNumberAndOneOperator() {
+        // Given.
+        Function function = new Function();
+        function.onNumberCharacterPressed('5');
+        function.onOperatorCharacterPressed('+');
+
+        // When.
+        function.onClearPressed();
+
+        // Then.
+        Assert.assertEquals("5", function.getSummaryString());
+    }
 
 }
