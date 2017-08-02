@@ -56,14 +56,13 @@ public class Function {
         int sum = 0;
         String result = "";
 
-        if(!numbers.isEmpty()){
+        if (!numbers.isEmpty()) {
             for (int i = 0; i < numbers.size(); i++) {
                 sum = sum + Integer.valueOf(numbers.get(i).toString());
             }
 
-             result= String.valueOf(sum);
+            result = String.valueOf(sum);
         }
-
 
 
         return result;
@@ -74,27 +73,23 @@ public class Function {
         operators.clear();
     }
 
-    public void onClearPressed(){
-        if(!numbers.isEmpty() || !operators.isEmpty()){
-            if(numbers.size()==operators.size()){
-                operators.remove(operators.size()-1);
-            }
-            else{
-                if(numbers.size()==1){
-                    if(getLastNumber().length()==1){
+    public void onClearPressed() {
+        if (!numbers.isEmpty() || !operators.isEmpty()) {
+            if (numbers.size() == operators.size()) {
+                operators.remove(operators.size() - 1);
+            } else {
+                if (numbers.size() == 1) {
+                    if (getLastNumber().length() == 1) {
                         reset();
-                    }
-                    else{
+                    } else {
                         StringBuilder lastNumber = getLastNumber();
                         lastNumber.deleteCharAt(lastNumber.length() - 1);
                     }
-                }
+                } else {
+                    getLastNumber().deleteCharAt(getLastNumber().length() - 1);
 
-                else{
-                    getLastNumber().deleteCharAt(getLastNumber().length()-1);
-
-                    if(getLastNumber().length()==0){
-                        numbers.remove(numbers.size()-1);
+                    if (getLastNumber().length() == 0) {
+                        numbers.remove(numbers.size() - 1);
                     }
                 }
             }
@@ -103,48 +98,6 @@ public class Function {
 
     }
 
-    public void onClear_Pressed() {
-        //text: 1+2
-        // when user presses C it needs to delete
-        /*
-        * if numbers array size is ONE(i.e one element)
-        * then check if in this element the length of the
-        * stringbuilder isEqual to ONE (has one character); if it is, we need to remove or clear this
-        * element from the array; we also need to remove/clear the character in it. We then
-        * append zero to the stringBuilder element and re-add that to the numbers array
-        * */
-        if (numbers.size() == 1) {
-
-
-            if (getLastNumber().length() == 1) {
-                reset();
-            }
-
-           /*
-                else if the length of stringbuilder object is more than 1 then
-                we decrementally delete the characters in this element
-            */
-            else {
-                StringBuilder lastNumber = getLastNumber();
-                lastNumber.deleteCharAt(lastNumber.length() - 1);
-            }
-        }
-
-       /*
-       * This else deals with the case when array size is more than one (has more elements than one)
-       * we need to grab the last element in the array then we need to delete the last character
-       * in the stringBuilder object of this last element. When the length of the strinbuilder object in this
-       * last element of array becomes ZERO we need to remove this element of the array
-       * */
-        else {
-            StringBuilder lastNumber = getLastNumber();
-            lastNumber.deleteCharAt(lastNumber.length() - 1);
-
-            if (getLastNumber().length() == 0) {
-                numbers.remove(numbers.size() - 1);
-            }
-        }
-    }
 
     private StringBuilder getLastNumber() {
         return numbers.get(numbers.size() - 1);
