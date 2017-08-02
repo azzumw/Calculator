@@ -1,14 +1,13 @@
 package com.example.macintosh.calculator;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by macintosh on 23/06/2017.
  */
 
 public class Function {
-
-    private static final char ZERO = '0';
 
     private ArrayList<StringBuilder> numbers;
     private ArrayList<String> operators;
@@ -19,15 +18,18 @@ public class Function {
         reset();
     }
 
-    /**
-     * ABSOLUTELY DO NOT CHANGE
-     */
     public String getSummaryString() {
-        String string = "";
-        for (StringBuilder sb : numbers) {
-            string += sb;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < numbers.size(); i++) {
+            sb.append(numbers.get(i));
+
+            if (i < operators.size()) {
+                sb.append(operators.get(i));
+            }
         }
-        return string;
+
+        return sb.toString();
     }
 
     public void onNumberCharacterPressed(char theNumber) {
@@ -36,32 +38,27 @@ public class Function {
         } else if (theNumber == '0' && isLastNumberZero()) {
             // nothing to do
         } else {
-            // TODO append the number to the last item in the numbers array
             getLastNumber().append(theNumber);
         }
     }
-
 
     public void onOperatorCharacterPressed(char theOperator) {
         if (numbers.size() == 0) {
             // nothing to do
         } else if (isOperatorsAndNumbersListsEqual()) {
-            // TODO replace the last operator that was put in the operators list
-            operators.set(operators.size()-1,String.valueOf(theOperator));
+            operators.set(operators.size() - 1, String.valueOf(theOperator));
         } else {
-            // TODO append the operator to the operators list
             operators.add(String.valueOf(theOperator));
         }
     }
 
-    /**
-     * ABSOLUTELY DO NOT CHANGE
-     */
     public int getResult() {
         int sum = 0;
+
         for (int i = 0; i < numbers.size(); i++) {
             sum = sum + Integer.valueOf(numbers.get(i).toString());
         }
+
         return sum;
     }
 
@@ -113,24 +110,12 @@ public class Function {
         }
     }
 
-//    public void printNumbers() {
-//        for (int i = 0; i < numbers.size(); i++) {
-//            Log.v("Index: " + i, numbers.get(i).toString());
-//        }
-//    }
-
     private StringBuilder getLastNumber() {
         return numbers.get(numbers.size() - 1);
     }
 
     private boolean isLastNumberZero() {
-        // TODO: check whether the last item in the numbers list is "0"
-        boolean isLastNumberZero = false;
-        if(numbers.get(numbers.size()-1).equals("0")){
-            isLastNumberZero = true;
-        }
-
-        return isLastNumberZero;
+        return getLastNumber().toString().equals("0");
 
     }
 

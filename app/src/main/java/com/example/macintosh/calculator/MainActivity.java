@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //do something
                 function.onOperatorCharacterPressed('-');
                 txtfield.setText(function.getSummaryString());
 
@@ -64,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        clearBtn.setOnClickListener(new View.OnClickListener() {
+        /*clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 function.onClearPressed();
                 txtfield.setText(function.getSummaryString());
             }
-        });
+        });*/
 
 
         final Button equalBtn = (Button) findViewById(R.id.btnEquals);
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void numberPress(View view){
-        final Button btn = (Button) findViewById(view.getId());
+        Button btn = findViewById(view.getId());
         onNumberPressed(btn.getText().charAt(0));
     }
 
