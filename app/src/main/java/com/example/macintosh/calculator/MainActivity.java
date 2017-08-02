@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*clearBtn.setOnClickListener(new View.OnClickListener() {
+        clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 function.onClearPressed();
                 txtfield.setText(function.getSummaryString());
             }
-        });*/
+        });
 
 
         final Button equalBtn = (Button) findViewById(R.id.btnEquals);

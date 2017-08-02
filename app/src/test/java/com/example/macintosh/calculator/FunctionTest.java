@@ -72,9 +72,9 @@ public class FunctionTest {
         Function function = new Function();
         function.onNumberCharacterPressed('5');
 
-        int result = function.getResult();
+        String result = function.getResult();
 
-        Assert.assertEquals(5,result);
+        Assert.assertEquals("5",result);
 
     }
 
@@ -102,9 +102,9 @@ public class FunctionTest {
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('7');
 
-        int result = function.getResult();
+        String result = function.getResult();
 
-        Assert.assertEquals(5+7,result);
+        Assert.assertEquals("12",result);
     }
 
     @Test
@@ -115,9 +115,9 @@ public class FunctionTest {
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('0');
 
-        int result = function.getResult();
+        String result = function.getResult();
 
-        Assert.assertEquals(48,result);
+        Assert.assertEquals("48",result);
 
     }
 
@@ -136,7 +136,7 @@ public class FunctionTest {
     }
 
     @Test
-    @Ignore
+
     public void test_onClearPressed_whenNothingAdded() {
         // Given.
         Function function = new Function();

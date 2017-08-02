@@ -52,14 +52,21 @@ public class Function {
         }
     }
 
-    public int getResult() {
+    public String getResult() {
         int sum = 0;
+        String result = "";
 
-        for (int i = 0; i < numbers.size(); i++) {
-            sum = sum + Integer.valueOf(numbers.get(i).toString());
+        if(!numbers.isEmpty()){
+            for (int i = 0; i < numbers.size(); i++) {
+                sum = sum + Integer.valueOf(numbers.get(i).toString());
+            }
+
+             result= String.valueOf(sum);
         }
 
-        return sum;
+
+
+        return result;
     }
 
     public void reset() {
@@ -67,7 +74,36 @@ public class Function {
         operators.clear();
     }
 
-    public void onClearPressed() {
+    public void onClearPressed(){
+        if(!numbers.isEmpty() || !operators.isEmpty()){
+            if(numbers.size()==operators.size()){
+                operators.remove(operators.size()-1);
+            }
+            else{
+                if(numbers.size()==1){
+                    if(getLastNumber().length()==1){
+                        reset();
+                    }
+                    else{
+                        StringBuilder lastNumber = getLastNumber();
+                        lastNumber.deleteCharAt(lastNumber.length() - 1);
+                    }
+                }
+
+                else{
+                    getLastNumber().deleteCharAt(getLastNumber().length()-1);
+
+                    if(getLastNumber().length()==0){
+                        numbers.remove(numbers.size()-1);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    public void onClear_Pressed() {
         //text: 1+2
         // when user presses C it needs to delete
         /*
