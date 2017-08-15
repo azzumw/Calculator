@@ -10,11 +10,11 @@ import java.util.Objects;
 public class Function {
 
     private ArrayList<StringBuilder> numbers;
-    private ArrayList<String> operators;
+    private ArrayList<Operator> operators;
 
     public Function() {
-        numbers = new ArrayList<>();
-        operators = new ArrayList<>();
+        numbers = new ArrayList<StringBuilder>();
+        operators = new ArrayList<Operator>();
         reset();
     }
 
@@ -25,7 +25,7 @@ public class Function {
             sb.append(numbers.get(i));
 
             if (i < operators.size()) {
-                sb.append(operators.get(i));
+                sb.append(operators.get(i).getOperator());
             }
         }
 
@@ -46,10 +46,12 @@ public class Function {
         if (numbers.size() == 0) {
             // nothing to do
         } else if (isOperatorsAndNumbersListsEqual()) {
-            operators.set(operators.size() - 1, String.valueOf(theOperator));
+//            operators.set(operators.size() - 1, String.valueOf(theOperator));
+            operators.set(operators.size() - 1, new PlusOperator(theOperator));
         } else {
-            operators.add(String.valueOf(theOperator));
+            operators.add(new PlusOperator(theOperator));
         }
+
     }
 
     public String getResult() {

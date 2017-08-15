@@ -6,8 +6,12 @@ package com.example.macintosh.calculator;
 
 public class PlusOperator extends Operator {
 
+
+    public PlusOperator(char op){
+        super(op);
+    }
     @Override
     public int evaluate(int a, int b) {
-        return 0;
+        return a+ b;
     }
 }

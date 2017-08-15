@@ -1,10 +1,12 @@
 package com.example.macintosh.calculator;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +14,7 @@ import static org.junit.Assert.*;
  * Created by macintosh on 02/08/2017.
  */
 @RunWith(JUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FunctionTest {
 
     @Test
@@ -163,7 +166,6 @@ public class FunctionTest {
     }
 
     @Test
-    @Ignore
     public void test_onClearPressed_afterAddingOneNumberAndOneOperator() {
         // Given.
         Function function = new Function();
@@ -175,6 +177,40 @@ public class FunctionTest {
 
         // Then.
         Assert.assertEquals("5", function.getSummaryString());
+    }
+
+    @Test
+    public void test_onClearPressed_getResult(){
+        Function function = new Function();
+        function.onNumberCharacterPressed('5');
+        function.onNumberCharacterPressed('6');
+        function.onOperatorCharacterPressed('+');
+        function.onNumberCharacterPressed('4');
+        function.onNumberCharacterPressed('4');
+
+        function.onClearPressed();
+
+        String result = function.getResult();
+
+        Assert.assertEquals("60",result);
+
+    }
+
+    @Test
+    public void test_onClearPressed_ResultCheck(){
+        Function function = new Function();
+
+        function.onNumberCharacterPressed('3');
+        function.onNumberCharacterPressed('0');
+        function.onOperatorCharacterPressed('+');
+        function.onNumberCharacterPressed('2');
+        function.onNumberCharacterPressed('5');
+
+        function.onClearPressed();
+
+        String result = function.getResult();
+
+        Assert.assertEquals("32",result);
     }
 
 }
