@@ -10,6 +10,8 @@ public class OperatorFactory {
         switch (operator) {
             case '+':
                 return new PlusOperator();
+            case '-':
+                return new MinusOperator();
             default:
                 throw new RuntimeException("Unrecognised operator");
         }
