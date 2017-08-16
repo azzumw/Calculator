@@ -18,23 +18,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //final TextView txtfield = (TextView) findViewById(R.id.TextField);
-        txtfield = (TextView) findViewById(R.id.TextField);
-        txtfieldans = (TextView) findViewById(R.id.TextFieldAnswer);
+        txtfield = findViewById(R.id.TextField);
+        txtfieldans = findViewById(R.id.TextFieldAnswer);
 
+        OperatorFactory operatorFactory = new OperatorFactory();
+        function = new Function(operatorFactory);
 
-
-        function = new Function();
         txtfield.setText(function.getSummaryString());
         txtfieldans.setText("");
-
-
 
         final Button plusBtn = (Button) findViewById(R.id.btnPlus);
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 function.onOperatorCharacterPressed('+');
                 txtfield.setText(function.getSummaryString());
 
@@ -47,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('-');
                 txtfield.setText(function.getSummaryString());
-
             }
         });
 
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     } //end of oncreate()
 
 
-    public void numberPress(View view){
+    public void numberPress(View view) {
         Button btn = findViewById(view.getId());
         onNumberPressed(btn.getText().charAt(0));
     }
