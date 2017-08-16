@@ -61,7 +61,14 @@ public class Function {
         int sum = 0;
 
         for (int i = 0; i < numbers.size(); i++) {
-            sum = sum + Integer.valueOf(numbers.get(i).toString());
+            int ithNumber = getNumber(i);
+
+            if (i == 0) {
+                sum = ithNumber;
+            } else {
+                Operator operator = operators.get(i - 1);
+                sum = operator.evaluate(sum, ithNumber);
+            }
         }
 
         return sum;
@@ -99,9 +106,12 @@ public class Function {
         return numbers.get(numbers.size() - 1);
     }
 
+    private int getNumber(int position) {
+        return Integer.valueOf(numbers.get(position).toString());
+    }
+
     private boolean isLastNumberZero() {
         return getLastNumber().toString().equals("0");
-
     }
 
     private boolean isOperatorsAndNumbersListsEqual() {
