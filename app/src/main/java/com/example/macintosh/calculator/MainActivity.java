@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         equalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                txtfieldans.setText(String.valueOf(function.getResult()));
+                FunctionEvaluator functionEvaluator = new FunctionEvaluator();
+                txtfieldans.setText(String.valueOf(functionEvaluator.evaluate(function)));
             }
         });
 

@@ -57,23 +57,6 @@ public class Function {
         }
     }
 
-    public int getResult() {
-        int sum = 0;
-
-        for (int i = 0; i < numbers.size(); i++) {
-            int ithNumber = getNumber(i);
-
-            if (i == 0) {
-                sum = ithNumber;
-            } else {
-                Operator operator = operators.get(i - 1);
-                sum = operator.evaluate(sum, ithNumber);
-            }
-        }
-
-        return sum;
-    }
-
     public void reset() {
         numbers.clear();
         operators.clear();
@@ -106,13 +89,26 @@ public class Function {
         return numbers.get(numbers.size() - 1);
     }
 
-    private int getNumber(int position) {
+    public int getNumber(int position) {
         return Integer.valueOf(numbers.get(position).toString());
+    }
+
+    public int getNumbersListSize(){
+        return numbers.size();
+    }
+
+    public int getOperatorsListSize(){
+        return operators.size();
+    }
+
+    public Operator getOperator(int i){
+        return operators.get(i);
     }
 
     private boolean isLastNumberZero() {
         return getLastNumber().toString().equals("0");
     }
+
 
     private boolean isOperatorsAndNumbersListsEqual() {
         return operators.size() == numbers.size();
