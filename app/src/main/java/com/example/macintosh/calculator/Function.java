@@ -57,19 +57,14 @@ public class Function {
         }
     }
 
-    public String getResult() {
+    public int getResult() {
         int sum = 0;
-        String result = "";
 
-        if (!numbers.isEmpty()) {
-            for (int i = 0; i < numbers.size(); i++) {
-                sum = sum + Integer.valueOf(numbers.get(i).toString());
-            }
-
-            result = String.valueOf(sum);
+        for (int i = 0; i < numbers.size(); i++) {
+            sum = sum + Integer.valueOf(numbers.get(i).toString());
         }
 
-        return result;
+        return sum;
     }
 
     public void reset() {

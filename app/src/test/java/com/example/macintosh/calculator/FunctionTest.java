@@ -1,6 +1,7 @@
 package com.example.macintosh.calculator;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,10 +18,16 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FunctionTest {
 
+    private Function function;
+
+    @Before
+    public void setUp() {
+        function = new Function(new OperatorFactory());
+    }
+
     @Test
     public void test_getSummaryString_afterAddingOneNumber() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
 
         // When.
@@ -33,7 +40,6 @@ public class FunctionTest {
     @Test
     public void test_getSummaryString_afterAddingOneNumberAndOneOperator() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
         function.onOperatorCharacterPressed('+');
 
@@ -47,7 +53,6 @@ public class FunctionTest {
     @Test
     public void test_getSummaryString_afterAddingTwoNumbersAndOneOperator() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
         function.onNumberCharacterPressed('4');
         function.onOperatorCharacterPressed('+');
@@ -60,75 +65,67 @@ public class FunctionTest {
     }
 
     @Test
-    public void test_getSummaryString_afterAddingOneNumberOneOperatorAndOneNumber(){
-        Function function = new Function();
+    public void test_getSummaryString_afterAddingOneNumberOneOperatorAndOneNumber() {
         function.onNumberCharacterPressed('6');
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('6');
 
         String result = function.getSummaryString();
-        Assert.assertEquals("6+6",result);
+        Assert.assertEquals("6+6", result);
     }
 
     @Test
-    public void test_getResult_for_oneNumber(){
-        Function function = new Function();
+    public void test_getResult_for_oneNumber() {
         function.onNumberCharacterPressed('5');
 
-        String result = function.getResult();
+        int result = function.getResult();
 
-        Assert.assertEquals("5",result);
+        Assert.assertEquals(5, result);
 
     }
 
     @Test
-    public void test_getSummaryString_onZeroPressed(){
-        Function function = new Function();
-            int count = 0;
-            while(count<3){
-                function.onNumberCharacterPressed('0');
-                count++;
-            }
+    public void test_getSummaryString_onZeroPressed() {
+        int count = 0;
+        while (count < 3) {
+            function.onNumberCharacterPressed('0');
+            count++;
+        }
 
 
         String result = function.getSummaryString();
-        Assert.assertEquals("0",result);
+        Assert.assertEquals("0", result);
 
 
     }
 
-    // TODO: fill in three missing getResult tests
     @Test
-    public void test_get_Result_for_oneNumber_oneOperator_oneNumber(){
-        Function function = new Function();
+    public void test_get_Result_for_oneNumber_oneOperator_oneNumber() {
         function.onNumberCharacterPressed('5');
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('7');
 
-        String result = function.getResult();
+        int result = function.getResult();
 
-        Assert.assertEquals("12",result);
+        Assert.assertEquals(12, result);
     }
 
     @Test
-    public void test_getResult_for_NumbNumbOperatorZero (){
-        Function function = new Function();
+    public void test_getResult_for_NumbNumbOperatorZero() {
         function.onNumberCharacterPressed('4');
         function.onNumberCharacterPressed('8');
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('0');
 
-        String result = function.getResult();
+        int result = function.getResult();
 
-        Assert.assertEquals("48",result);
-
+        Assert.assertEquals(48, result);
     }
 
 
     @Test
     public void test_onClearPressed_afterAddingOneNumber() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
 
         // When.
@@ -141,9 +138,6 @@ public class FunctionTest {
     @Test
 
     public void test_onClearPressed_whenNothingAdded() {
-        // Given.
-        Function function = new Function();
-
         // When.
         function.onClearPressed();
 
@@ -154,7 +148,6 @@ public class FunctionTest {
     @Test
     public void test_onClearPressed_afterAddingTwoNumbers() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
         function.onNumberCharacterPressed('6');
 
@@ -168,7 +161,6 @@ public class FunctionTest {
     @Test
     public void test_onClearPressed_afterAddingOneNumberAndOneOperator() {
         // Given.
-        Function function = new Function();
         function.onNumberCharacterPressed('5');
         function.onOperatorCharacterPressed('+');
 
@@ -180,8 +172,7 @@ public class FunctionTest {
     }
 
     @Test
-    public void test_onClearPressed_getResult(){
-        Function function = new Function();
+    public void test_onClearPressed_getResult() {
         function.onNumberCharacterPressed('5');
         function.onNumberCharacterPressed('6');
         function.onOperatorCharacterPressed('+');
@@ -190,16 +181,14 @@ public class FunctionTest {
 
         function.onClearPressed();
 
-        String result = function.getResult();
+        int result = function.getResult();
 
-        Assert.assertEquals("60",result);
+        Assert.assertEquals(60, result);
 
     }
 
     @Test
-    public void test_onClearPressed_ResultCheck(){
-        Function function = new Function();
-
+    public void test_onClearPressed_ResultCheck() {
         function.onNumberCharacterPressed('3');
         function.onNumberCharacterPressed('0');
         function.onOperatorCharacterPressed('+');
@@ -208,9 +197,8 @@ public class FunctionTest {
 
         function.onClearPressed();
 
-        String result = function.getResult();
+        int result = function.getResult();
 
-        Assert.assertEquals("32",result);
+        Assert.assertEquals(32, result);
     }
-
 }
