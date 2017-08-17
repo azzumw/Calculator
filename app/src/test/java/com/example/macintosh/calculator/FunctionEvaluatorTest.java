@@ -68,4 +68,15 @@ public class FunctionEvaluatorTest {
         assertEquals(3,result);
     }
 
+    @Test
+    public void test_multiplication_number_operator_number(){
+        function.onNumberCharacterPressed('5');
+        function.onOperatorCharacterPressed('x');
+        function.onNumberCharacterPressed('3');
+
+        int result = functionEvaluator.evaluate(function);
+
+        assertEquals(15,result);
+    }
+
 }

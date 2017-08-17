@@ -19,10 +19,12 @@ import static org.junit.Assert.*;
 public class FunctionTest {
 
     private Function function;
+    private ViewSummary summary;
 
     @Before
     public void setUp() {
         function = new Function(new OperatorFactory());
+        summary = new ViewSummary();
     }
 
     @Test
@@ -31,7 +33,7 @@ public class FunctionTest {
         function.onNumberCharacterPressed('5');
 
         // When.
-        String result = function.getSummaryString();
+        String result = summary.createSummary(function);
 
         // Then.
         Assert.assertEquals("5", result);
@@ -44,7 +46,7 @@ public class FunctionTest {
         function.onOperatorCharacterPressed('+');
 
         // When.
-        String result = function.getSummaryString();
+        String result = summary.createSummary(function);
 
         // Then.
         Assert.assertEquals("5+", result);
@@ -58,7 +60,7 @@ public class FunctionTest {
         function.onOperatorCharacterPressed('+');
 
         // When.
-        String result = function.getSummaryString();
+        String result = summary.createSummary(function);
 
         // Then.
         Assert.assertEquals("54+", result);
@@ -70,7 +72,7 @@ public class FunctionTest {
         function.onOperatorCharacterPressed('+');
         function.onNumberCharacterPressed('6');
 
-        String result = function.getSummaryString();
+        String result = summary.createSummary(function);
         Assert.assertEquals("6+6", result);
     }
 
@@ -85,7 +87,7 @@ public class FunctionTest {
         }
 
 
-        String result = function.getSummaryString();
+        String result = summary.createSummary(function);
         Assert.assertEquals("0", result);
 
 
@@ -104,7 +106,7 @@ public class FunctionTest {
         function.onClearPressed();
 
         // Then.
-        Assert.assertEquals("", function.getSummaryString());
+        Assert.assertEquals("", summary.createSummary(function));
     }
 
     @Test
@@ -114,7 +116,7 @@ public class FunctionTest {
         function.onClearPressed();
 
         // Then.
-        Assert.assertEquals("", function.getSummaryString());
+        Assert.assertEquals("", summary.createSummary(function));
     }
 
     @Test
@@ -127,7 +129,7 @@ public class FunctionTest {
         function.onClearPressed();
 
         // Then.
-        Assert.assertEquals("5", function.getSummaryString());
+        Assert.assertEquals("5", summary.createSummary(function));
     }
 
     @Test
@@ -140,7 +142,7 @@ public class FunctionTest {
         function.onClearPressed();
 
         // Then.
-        Assert.assertEquals("5", function.getSummaryString());
+        Assert.assertEquals("5", summary.createSummary(function));
     }
 
 
