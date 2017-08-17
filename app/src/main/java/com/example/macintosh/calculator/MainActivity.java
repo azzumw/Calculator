@@ -11,48 +11,59 @@ public class MainActivity extends AppCompatActivity {
     TextView txtfield;
     TextView txtfieldans;
 
-
+    ViewSummary viewSummary;
     Function function;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         txtfield = findViewById(R.id.TextField);
         txtfieldans = findViewById(R.id.TextFieldAnswer);
 
         OperatorFactory operatorFactory = new OperatorFactory();
         function = new Function(operatorFactory);
+        viewSummary = new ViewSummary();
 
-        txtfield.setText(function.getSummaryString());
+        txtfield.setText(viewSummary.createSummary(function));
         txtfieldans.setText("");
 
-        final Button plusBtn = (Button) findViewById(R.id.btnPlus);
+        final Button plusBtn =  findViewById(R.id.btnPlus);
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('+');
-                txtfield.setText(function.getSummaryString());
+                txtfield.setText(viewSummary.createSummary(function));
 
             }
         });
 
-        final Button minusBtn = (Button) findViewById(R.id.btnSubtract);
+        final Button minusBtn =  findViewById(R.id.btnSubtract);
         minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('-');
-                txtfield.setText(function.getSummaryString());
+                txtfield.setText(viewSummary.createSummary(function));
             }
         });
 
 
-        final Button clearBtn = (Button) findViewById(R.id.btnClear);
+        final Button multiplyBtn =  findViewById(R.id.btnMultiply);
+        multiplyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                function.onOperatorCharacterPressed('x');
+                txtfield.setText(viewSummary.createSummary(function));
+            }
+        });
+
+        final Button clearBtn =  findViewById(R.id.btnClear);
         clearBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 function.reset();
-                txtfield.setText(function.getSummaryString());
+                txtfield.setText(viewSummary.createSummary(function));
                 txtfieldans.setText("");
                 return false;
             }
@@ -62,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onClearPressed();
-                txtfield.setText(function.getSummaryString());
+                txtfield.setText(viewSummary.createSummary(function));
             }
         });
 
 
-        final Button equalBtn = (Button) findViewById(R.id.btnEquals);
+        final Button equalBtn =  findViewById(R.id.btnEquals);
         equalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    } //end of oncreate()
+    }
 
 
     public void numberPress(View view) {
@@ -86,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onNumberPressed(char theNumber) {
         function.onNumberCharacterPressed(theNumber);
-        txtfield.setText(function.getSummaryString());
+        txtfield.setText(viewSummary.createSummary(function));
     }
 
     /**

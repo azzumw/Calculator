@@ -14,6 +14,7 @@ public class Function {
     private ArrayList<StringBuilder> numbers;
     private ArrayList<Operator> operators;
 
+    //constructor
     public Function(OperatorFactory operatorFactory) {
         this.operatorFactory = operatorFactory;
 
@@ -23,19 +24,6 @@ public class Function {
         reset();
     }
 
-    public String getSummaryString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < numbers.size(); i++) {
-            sb.append(numbers.get(i));
-
-            if (i < operators.size()) {
-                sb.append(operators.get(i).toString());
-            }
-        }
-
-        return sb.toString();
-    }
 
     public void onNumberCharacterPressed(char theNumber) {
         if (isOperatorsAndNumbersListsEqual()) {

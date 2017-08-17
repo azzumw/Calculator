@@ -1,7 +1,8 @@
 package com.example.macintosh.calculator;
 
 /**
- * Created by macintosh on 16/08/2017.
+ * This class merely uses create method
+ * to create an instance of an Operator class.
  */
 
 public class OperatorFactory {
@@ -12,6 +13,8 @@ public class OperatorFactory {
                 return new PlusOperator();
             case '-':
                 return new MinusOperator();
+            case 'x':
+                return new MultiplicationOperator();
             default:
                 throw new RuntimeException("Unrecognised operator");
         }
