@@ -97,7 +97,6 @@ public class Function {
         return getLastNumber().toString().equals("0");
     }
 
-
     private boolean isOperatorsAndNumbersListsEqual() {
         return operators.size() == numbers.size();
     }

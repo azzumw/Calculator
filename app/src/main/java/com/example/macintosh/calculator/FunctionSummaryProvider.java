@@ -4,9 +4,9 @@ package com.example.macintosh.calculator;
  * Created by macintosh on 16/08/2017.
  */
 
-public class ViewSummary {
+public class FunctionSummaryProvider {
 
-    public String createSummary(Function function){
+    public String provideSummary(Function function){
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < function.getNumbersListSize(); i++) {

@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtfield;
     TextView txtfieldans;
 
-    ViewSummary viewSummary;
+    FunctionEvaluator functionEvaluator;
+    FunctionSummaryProvider functionSummaryProvider;
     Function function;
 
     @Override
@@ -24,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         OperatorFactory operatorFactory = new OperatorFactory();
         function = new Function(operatorFactory);
-        viewSummary = new ViewSummary();
+        functionSummaryProvider = new FunctionSummaryProvider();
+        functionEvaluator = new FunctionEvaluator();
 
-        txtfield.setText(viewSummary.createSummary(function));
+        txtfield.setText(functionSummaryProvider.provideSummary(function));
         txtfieldans.setText("");
 
         final Button plusBtn =  findViewById(R.id.btnPlus);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('+');
-                txtfield.setText(viewSummary.createSummary(function));
+                txtfield.setText(functionSummaryProvider.provideSummary(function));
 
             }
         });
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('-');
-                txtfield.setText(viewSummary.createSummary(function));
+                txtfield.setText(functionSummaryProvider.provideSummary(function));
             }
         });
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onOperatorCharacterPressed('x');
-                txtfield.setText(viewSummary.createSummary(function));
+                txtfield.setText(functionSummaryProvider.provideSummary(function));
             }
         });
 
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 function.reset();
-                txtfield.setText(viewSummary.createSummary(function));
+                txtfield.setText(functionSummaryProvider.provideSummary(function));
                 txtfieldans.setText("");
                 return false;
             }
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 function.onClearPressed();
-                txtfield.setText(viewSummary.createSummary(function));
+                txtfield.setText(functionSummaryProvider.provideSummary(function));
             }
         });
 
@@ -82,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         equalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FunctionEvaluator functionEvaluator = new FunctionEvaluator();
                 txtfieldans.setText(String.valueOf(functionEvaluator.evaluate(function)));
             }
         });
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onNumberPressed(char theNumber) {
         function.onNumberCharacterPressed(theNumber);
-        txtfield.setText(viewSummary.createSummary(function));
+        txtfield.setText(functionSummaryProvider.provideSummary(function));
     }
 
     /**
@@ -118,43 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
         return hasPeriod;
     }
-
-
-    /**
-     * checks if there is an operator in the text view.
-     * returns true if it has.
-     */
-    public boolean checkOperator() {
-        boolean hasOperator = false;
-        char plus = '+';
-        char minus = '-';
-        char divide = '/';
-        char multiply = 'x';
-
-        for (int i = 0; i < txtfield.getText().length(); i++) {
-            if (txtfield.getText().charAt(i) == plus || txtfield.getText().charAt(i) == minus ||
-                    txtfield.getText().charAt(i) == divide || txtfield.getText().charAt(i) == multiply) {
-                hasOperator = true;
-            }
-        }
-
-        return hasOperator;
-    }
-
-
-    public boolean hasOpenBracket() {
-        boolean hasOpenBracket = false;
-
-        for (int i = 0; i < txtfield.getText().length(); i++) {
-            if (txtfield.getText().charAt(i) == '(') {
-                //numberOfOpenBrackets++;
-
-                hasOpenBracket = true;
-            }
-        }
-        return hasOpenBracket;
-    }
-
 
     //BRACKETs
     //Open Bracket
