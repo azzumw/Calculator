@@ -1,6 +1,7 @@
 package com.example.macintosh.calculator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Objects;
 
 /**
@@ -50,14 +51,14 @@ public class Function {
         operators.clear();
     }
 
-    public void onClearPressed() {
+   /* public void onClearPressed() {
         if (!numbers.isEmpty() || !operators.isEmpty()) {
             if (numbers.size() == operators.size()) {
                 operators.remove(operators.size() - 1);
             } else {
                 if (numbers.size() == 1) {
                     if (getLastNumber().length() == 1) {
-                        reset();
+                        //reset();
                     } else {
                         StringBuilder lastNumber = getLastNumber();
                         lastNumber.deleteCharAt(lastNumber.length() - 1);
@@ -71,9 +72,9 @@ public class Function {
                 }
             }
         }
-    }
+    }*/
 
-    private StringBuilder getLastNumber() {
+    public StringBuilder getLastNumber() {
         return numbers.get(numbers.size() - 1);
     }
 
@@ -93,11 +94,23 @@ public class Function {
         return operators.get(i);
     }
 
+
+    public ArrayList<StringBuilder> getNumbersList() {
+        return numbers;
+    }
+
+    public ArrayList<Operator> getOperatorsList() {
+        return operators;
+    }
+
     private boolean isLastNumberZero() {
         return getLastNumber().toString().equals("0");
     }
 
-    private boolean isOperatorsAndNumbersListsEqual() {
+    public boolean isOperatorsAndNumbersListsEqual() {
         return operators.size() == numbers.size();
     }
+
+
+
 }

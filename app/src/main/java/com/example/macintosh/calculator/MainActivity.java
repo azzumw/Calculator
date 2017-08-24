@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     FunctionEvaluator functionEvaluator;
     FunctionSummaryProvider functionSummaryProvider;
     Function function;
+    FunctionClear functionClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         function = new Function(operatorFactory);
         functionSummaryProvider = new FunctionSummaryProvider();
         functionEvaluator = new FunctionEvaluator();
+        functionClear = new FunctionClear();
 
         txtfield.setText(functionSummaryProvider.provideSummary(function));
         txtfieldans.setText("");
@@ -64,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         clearBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                function.reset();
+                //function.reset();
+                functionClear.onClearHold(function);
                 txtfield.setText(functionSummaryProvider.provideSummary(function));
                 txtfieldans.setText("");
                 return false;
@@ -74,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                function.onClearPressed();
+//                function.onClearPressed();
+                functionClear.onClearPressed(function);
                 txtfield.setText(functionSummaryProvider.provideSummary(function));
             }
         });
