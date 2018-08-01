@@ -6,6 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,11 +53,13 @@ public class MainActivityTest {
         onView(withId(R.id.TextField)).check(matches(withText("")));
         onView(withId(R.id.TextFieldAnswer)).check(matches(withText("")));
 
+        test_ten_minus_five();
+        three_minus_five();
 
 
     }
 
-    @Test
+    @Ignore
     public void test_ten_minus_five() throws Exception{
         onView(withId(R.id.btn1)).perform(click());
         onView(withId(R.id.btn0)).perform(click());
@@ -72,15 +75,15 @@ public class MainActivityTest {
 
     }
 
-    @Test
+    @Ignore
     public void three_minus_five () throws Exception{
         onView(withId(R.id.btn3)).perform(click());
         onView(withId(R.id.btnSubtract)).perform(click());
         onView(withId(R.id.btn5)).perform(click());
         onView(withId(R.id.btnEquals)).perform(click());
 
-        onView(withId(R.id.TextField)).check(matches(withText("3-5")));
-        onView(withId(R.id.TextFieldAnswer)).check(matches(withText("-2")));
+        onView(withId(R.id.TextField)).check(matches(withText("10-3-5")));
+        onView(withId(R.id.TextFieldAnswer)).check(matches(withText("2")));
 
         //for(int i=0; i <function.getNumbersListSize())
     }
